@@ -3,258 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CWJ TOOLS 1.5</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>CWJ TOOLS</title>
 
 <style>
-:root{
-  --bg:#000;
-  --card:#111116;
-  --border:rgba(255,255,255,0.08);
-  --text:#f5f5f7;
-  --muted:#86868b;
-  --blue:#2997ff;
-  --green:#30d158;
-  --purple:#bf5af2;
-}
-
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,system-ui;}
-
-body{
-  background:var(--bg);
-  color:var(--text);
-}
-
-/* 顶部 */
-.topbar{
-  padding:14px;
-  display:flex;
-  justify-content:space-between;
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(20px);
-}
-
-.logo{
-  font-weight:700;
-}
-
-.badge{
-  font-size:12px;
-  color:var(--green);
-}
-
-/* 页面 */
-.page{
-  display:none;
-  padding:14px;
-}
+body{margin:0;font-family:system-ui;background:#000;color:#fff;}
+.top{padding:14px;border-bottom:1px solid #222;display:flex;justify-content:space-between;}
+.pages{padding:12px;}
+.card{background:#111;border:1px solid #222;padding:12px;border-radius:12px;margin-bottom:10px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.btn{padding:12px;background:#2997ff;border:none;border-radius:10px;color:#fff;margin-top:8px;width:100%;}
+input,textarea{width:100%;padding:10px;margin-top:8px;border-radius:10px;border:1px solid #222;background:#111;color:#fff;}
+.page{display:none;}
 .page.active{display:block;}
-
-/* 卡片 */
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:14px;
-  margin-bottom:12px;
-  backdrop-filter:blur(20px);
-}
-
-/* 网格 */
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.tool{
-  background:var(--card);
-  border:1px solid var(--border);
-  padding:12px;
-  border-radius:14px;
-  cursor:pointer;
-}
-
-/* 输入 */
-input,textarea{
-  width:100%;
-  padding:10px;
-  margin-top:8px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:#0a0a0f;
-  color:#fff;
-}
-
-/* 按钮 */
-button{
-  width:100%;
-  padding:10px;
-  margin-top:8px;
-  border:none;
-  border-radius:10px;
-  background:var(--blue);
-  color:#fff;
-}
-
-/* 搜索 */
-.search{
-  width:100%;
-  padding:10px;
-  margin-bottom:10px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:#0a0a0f;
-  color:#fff;
-}
-
-/* 底部 */
-.bottom{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  display:flex;
-  border-top:1px solid var(--border);
-  background:#000;
-}
-
-.bottom div{
-  flex:1;
-  text-align:center;
-  padding:10px;
-  font-size:12px;
-  color:var(--muted);
-  cursor:pointer;
-}
-
-.bottom .active{
-  color:var(--blue);
-}
+.bottom{position:fixed;bottom:0;left:0;right:0;display:flex;background:#000;border-top:1px solid #222;}
+.bottom div{flex:1;text-align:center;padding:10px;font-size:12px;color:#888;}
+.bottom .active{color:#2997ff;}
 </style>
 </head>
 
 <body>
 
-<!-- 顶部 -->
-<div class="topbar">
-  <div class="logo">CWJ TOOLS 1.5</div>
-  <div class="badge">ONLINE</div>
+<div class="top">
+  <div>CWJ TOOLS</div>
+  <div style="color:#30d158;">ONLINE</div>
 </div>
+
+<div class="pages">
 
 <!-- HOME -->
-<div class="page active" id="home">
-
-  <div class="card">
-    📊 仪表盘<br>
-    ✔ 系统正常运行<br>
-    ✔ 工具模块：4 + 扩展
-  </div>
+<div id="home" class="page active">
+  <div class="card">工具中心（基础版恢复成功）</div>
 
   <div class="grid">
-    <div class="tool" onclick="go('pwd')">🔑 密码</div>
-    <div class="tool" onclick="go('weather')">🌤 天气</div>
-    <div class="tool" onclick="go('hash')"># 哈希</div>
-    <div class="tool" onclick="go('aes')">🔐 加密</div>
+    <div class="card" onclick="go('pwd')">🔑 密码生成</div>
+    <div class="card" onclick="go('weather')">🌤 天气</div>
+    <div class="card" onclick="go('hash')"># 哈希</div>
+    <div class="card" onclick="go('crypto')">🔐 加密</div>
   </div>
-
-  <div class="card" onclick="go('tools')">
-    🧰 进入工具中心 →
-  </div>
-
 </div>
 
-<!-- TOOLS -->
-<div class="page" id="tools">
-
-  <div class="card">
-    🧰 工具中心
-    <input class="search" placeholder="搜索工具..." oninput="search(this.value)">
-  </div>
-
-  <div class="grid" id="toolList">
-
-    <div class="tool">UUID生成</div>
-    <div class="tool">Base64</div>
-    <div class="tool">JSON格式化</div>
-    <div class="tool">时间戳</div>
-    <div class="tool">随机数</div>
-    <div class="tool">文本统计</div>
-    <div class="tool">URL编码</div>
-    <div class="tool">二维码</div>
-    <div class="tool">颜色转换</div>
-    <div class="tool">单位换算</div>
-    <div class="tool">IP查询</div>
-    <div class="tool">科学计算</div>
-
-  </div>
-
-</div>
-
-<!-- PASSWORD -->
-<div class="page" id="pwd">
-  <div class="card">密码生成器</div>
-  <input id="pwlen" type="number" value="12">
-  <button onclick="genPwd()">生成</button>
-  <div class="card" id="pwout"></div>
+<!-- PWD -->
+<div id="pwd" class="page">
+  <div class="card">密码生成</div>
+  <input id="pwdLen" type="number" value="12">
+  <button class="btn" onclick="genPwd()">生成</button>
+  <div class="card" id="pwdOut"></div>
 </div>
 
 <!-- WEATHER -->
-<div class="page" id="weather">
-  <div class="card">天气</div>
+<div id="weather" class="page">
+  <div class="card">天气查询</div>
   <input id="city">
-  <button onclick="getWeather()">查询</button>
+  <button class="btn" onclick="weather()">查询</button>
   <div class="card" id="wout"></div>
 </div>
 
 <!-- HASH -->
-<div class="page" id="hash">
+<div id="hash" class="page">
   <div class="card">SHA-256</div>
   <textarea id="hinput"></textarea>
-  <button onclick="hash()">计算</button>
+  <button class="btn" onclick="hash()">计算</button>
   <div class="card" id="hout"></div>
 </div>
 
-<!-- AES -->
-<div class="page" id="aes">
-  <div class="card">AES / Base64</div>
-  <textarea id="ainput"></textarea>
-  <button onclick="aesFake()">转换</button>
-  <div class="card" id="aout"></div>
+<!-- CRYPTO -->
+<div id="crypto" class="page">
+  <div class="card">Base64加密</div>
+  <textarea id="cinput"></textarea>
+  <button class="btn" onclick="cryptoTool()">转换</button>
+  <div class="card" id="cout"></div>
 </div>
 
-<!-- 底部 -->
+</div>
+
 <div class="bottom">
-  <div class="active" onclick="go('home',event)">首页</div>
-  <div onclick="go('tools',event)">工具</div>
-  <div onclick="go('weather',event)">天气</div>
-  <div onclick="go('hash',event)">哈希</div>
-  <div onclick="go('aes',event)">加密</div>
+  <div onclick="go('home')" class="active">首页</div>
+  <div onclick="go('pwd')">密码</div>
+  <div onclick="go('weather')">天气</div>
+  <div onclick="go('hash')">哈希</div>
+  <div onclick="go('crypto')">加密</div>
 </div>
 
 <script>
 
-function go(id,e){
+function go(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-
-  if(e){
-    document.querySelectorAll('.bottom div').forEach(b=>b.classList.remove('active'));
-    e.target.classList.add('active');
-  }
 }
 
-/* 搜索 */
-function search(v){
-  document.querySelectorAll('#toolList .tool').forEach(t=>{
-    t.style.display = t.innerText.includes(v) ? "block" : "none";
-  });
-}
-
-/* 密码 */
 function genPwd(){
-  let len=document.getElementById('pwlen').value;
-  let chars='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let out='';
- 
+  const len = document.getElementById('pwdLen').value;
+  const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let out = "";
+  const arr = crypto.getRandomValues(new Uint32Array(len));
+  for(let i=0;i<len;i++){
+    out += chars[arr[i]%chars.length];
+  }
+  document.getElementById('pwdOut').innerText = out;
+}
+
+async function weather(){
+  const city = document.getElementById('city').value;
+  const res = await fetch(`https://wttr.in/${city}?format=3`);
+  const text = await res.text();
+  document.getElementById('wout').innerText = text;
+}
+
+async function hash(){
+  const text = document.getElementById('hinput').value;
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  const hex = [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+  document.getElementById('hout').innerText = hex;
+}
+
+function cryptoTool(){
+  const text = document.getElementById('cinput').value;
+  document.getElementById('cout').innerText = btoa(text);
+}
+
+</script>
+
+</body>
+</html>
